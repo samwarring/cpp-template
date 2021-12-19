@@ -1,5 +1,10 @@
 name: cpp-template
-on: [push]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
 jobs:
   build-linux:
     runs-on: ubuntu-latest
@@ -29,8 +34,7 @@ jobs:
           path: |
             C:\users\runneradmin\AppData\Local\vcpkg
             C:\vcpkg\downloads\tools
-          key: vcpkg-${{ runner.os }}-${{ github.ref_name }}
-          restore-keys: vcpkg-${{ runner.os }}-develop
+          key: vcpkg-${{ runner.os }}
       - name: Configure
         env:
           VCPKG_ROOT: C:\vcpkg
