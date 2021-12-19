@@ -7,6 +7,16 @@
     },
     "configurePresets": [
         {
+            "name": "ninja-multi",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "condition": {
+                "type": "notEquals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
             "name": "vs2022",
             "generator": "Visual Studio 17 2022",
             "architecture": "x64",
@@ -45,6 +55,16 @@
     ],
     "buildPresets": [
         {
+            "name": "ninja-multi-debug",
+            "configurePreset": "ninja-multi",
+            "configuration": "Debug"
+        },
+        {
+            "name": "ninja-multi-release",
+            "configurePreset": "ninja-multi",
+            "configuration": "Release"
+        },
+        {
             "name": "vs2022-debug",
             "configurePreset": "vs2022",
             "configuration": "Debug"
@@ -66,6 +86,16 @@
         }
     ],
     "testPresets": [
+        {
+            "name": "ninja-multi-debug",
+            "configurePreset": "ninja-multi",
+            "configuration": "Debug"
+        },
+        {
+            "name": "ninja-multi-release",
+            "configurePreset": "ninja-multi",
+            "configuration": "Release"
+        },
         {
             "name": "vs2022-debug",
             "configurePreset": "vs2022",
