@@ -1,6 +1,6 @@
-#define BOOST_TEST_MODULE fib_test
+#define BOOST_TEST_MODULE cpp_template_test
 #include <boost/test/unit_test.hpp>
-#include <fib.h>
+#include <cpp_template.h>
 
 BOOST_AUTO_TEST_CASE(fib_test) {
   BOOST_REQUIRE_EQUAL(fib(0), 0);
