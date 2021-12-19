@@ -16,11 +16,10 @@ string(REPLACE "_" "-" NEW_NAME_HYPENS ${NEW_NAME})
 string(TOUPPER ${NEW_NAME} NEW_NAME_UPPER)
 string(REPLACE "-" "_" NEW_NAME_UPPER "${NEW_NAME_UPPER}")
 
-# Validated and ready to go!
-message("Adapting template to new name: ${NEW_NAME}")
+# Require a Git executable to rename/delete/stage changes
 find_package(Git REQUIRED QUIET)
 
-# Helper function to rename a file
+# Renames a file
 function(rename_file OLD_PATH NEW_PATH)
     message("Rename ${OLD_PATH} -> ${NEW_PATH}")
     if (${DRY_RUN})
@@ -30,7 +29,7 @@ function(rename_file OLD_PATH NEW_PATH)
                     COMMAND_ERROR_IS_FATAL ANY)
 endfunction()
 
-# Helper function to replace occurrances of a string in a file
+# Replaces occurrances of a string in a file
 function(replace_in_file FILE_PATH OLD_STRING NEW_STRING)
     message("Replace string in ${FILE_PATH}: \"${OLD_STRING}\" -> \"${NEW_STRING}\"")
     if (${DRY_RUN})
@@ -41,7 +40,7 @@ function(replace_in_file FILE_PATH OLD_STRING NEW_STRING)
     file(WRITE "${CMAKE_CURRENT_LIST_DIR}/${FILE_PATH}" "${NEW_FILE_CONTENTS}")
 endfunction()
 
-# Helper function to remove a file
+# Removes a file
 function(remove_file FILE_PATH)
     message("Remove ${FILE_PATH}")
     if (${DRY_RUN})
@@ -51,7 +50,29 @@ function(remove_file FILE_PATH)
                     COMMAND_ERROR_IS_FATAL ANY)
 endfunction(remove_file)
 
-# Replace occurances of cpp_template in files
+# Updates description in readme
+function(update_readme)
+    message("Updating readme with new description")
+    if (${DRY_RUN})
+        return()
+    endif()
+    set(DESCRIPTION_PATTERN "<!-- begin new description -->.*<!-- end new description -->")
+    file(READ "${CMAKE_CURRENT_LIST_DIR}/README.md" OLD_FILE_CONTENTS)
+    string(REGEX REPLACE "${DESCRIPTION_PATTERN}" "${NEW_DESC}" NEW_FILE_CONTENTS "${OLD_FILE_CONTENTS}")
+    file(WRITE "${CMAKE_CURRENT_LIST_DIR}/README.md" "${NEW_FILE_CONTENTS}")
+endfunction()
+
+# Stages all changes to git
+function(stage_changes)
+    if (${DRY_RUN})
+        return()
+    endif()
+    execute_process(COMMAND "${GIT_EXECUTABLE}" add --all
+                    COMMAND_ERROR_IS_FATAL ANY)
+endfunction()
+
+# Do the changes!
+message("Adapting template to new name: ${NEW_NAME}")
 replace_in_file(CMakeLists.txt cpp_template ${NEW_NAME})
 replace_in_file(src/CMakeLists.txt cpp_template ${NEW_NAME})
 replace_in_file(test/CMakeLists.txt cpp_template ${NEW_NAME})
@@ -60,14 +81,9 @@ replace_in_file(src/cpp_template.cpp cpp_template.h "${NEW_NAME}.h")
 replace_in_file(test/cpp_template_test.cpp cpp_template.h "${NEW_NAME}.h")
 replace_in_file(README.md cpp_template ${NEW_NAME})
 replace_in_file(vcpkg.json cpp-template ${NEW_NAME_HYPENS})
-
-# Rename template .h/.cpp files
+update_readme()
 rename_file(include/cpp_template.h "include/${NEW_NAME}.h")
 rename_file(src/cpp_template.cpp "src/${NEW_NAME}.cpp")
 rename_file(test/cpp_template_test.cpp "test/${NEW_NAME}_test.cpp")
-
-# Remove this script
 remove_file(adapt_template.cmake)
-
-# Stage all changes (but don't commit)
-execute_process(COMMAND "${GIT_EXECUTABLE}" add --all)
+stage_changes()
