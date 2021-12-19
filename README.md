@@ -11,9 +11,9 @@ This repo is a starting point for cross-platform C++ projects.
 ### Command line
 ```
 $ cd path\to\repo
-$ cmake -preset vs2022
-$ cmake --build -preset vs2022-debug
-$ cmake --build -preset vs2022-release
+$ cmake --preset vs2022
+$ cmake --build --preset vs2022-debug
+$ cmake --build --preset vs2022-release
 $ ctest --preset vs2022-debug
 $ ctest --preset vs2022-release
 ```
