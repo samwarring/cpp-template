@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.21)
+project(cpp-template)
+enable_testing()
+add_executable(cpp-template-app main.cpp)
+add_test(NAME cpp-template-app COMMAND cpp-template-app)
