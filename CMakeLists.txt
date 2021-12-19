@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(cpp-template)
+project(cpp_template)
 enable_testing()
 find_package(Boost COMPONENTS unit_test_framework)
 add_subdirectory(src)

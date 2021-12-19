@@ -1,4 +1,4 @@
-name: cpp-template
+name: build
 on:
   pull_request:
   push:
