@@ -89,32 +89,50 @@
         {
             "name": "ninja-multi-debug",
             "configurePreset": "ninja-multi",
-            "configuration": "Debug"
+            "configuration": "Debug",
+            "output": {
+                "outputOnFailure": true
+            }
         },
         {
             "name": "ninja-multi-release",
             "configurePreset": "ninja-multi",
-            "configuration": "Release"
+            "configuration": "Release",
+            "output": {
+                "outputOnFailure": true
+            }
         },
         {
             "name": "vs2022-debug",
             "configurePreset": "vs2022",
-            "configuration": "Debug"
+            "configuration": "Debug",
+            "output": {
+                "outputOnFailure": true
+            }
         },
         {
             "name": "vs2022-release",
             "configurePreset": "vs2022",
-            "configuration": "Release"
+            "configuration": "Release",
+            "output": {
+                "outputOnFailure": true
+            }
         },
         {
             "name": "vs2019-debug",
             "configurePreset": "vs2019",
-            "configuration": "Debug"
+            "configuration": "Debug",
+            "output": {
+                "outputOnFailure": true
+            }
         },
         {
             "name": "vs2019-release",
             "configurePreset": "vs2019",
-            "configuration": "Release"
+            "configuration": "Release",
+            "output": {
+                "outputOnFailure": true
+            }
         }
     ]
 }
