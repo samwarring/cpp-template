@@ -1,7 +1,8 @@
 # Check for NEW_NAME on command line (Required)
 if ("${NEW_NAME}" STREQUAL "")
     message("Usage: cmake -DNEW_NAME=<new project name>\n"
-            "             [-DDRY_RUN=1]\n"
+            "            [-DNEW_DESC=<new projecte description>]\n"
+            "            [-DDRY_RUN=1]\n"
             "             -P adapt_template.cmake")
     message(FATAL_ERROR "NEW_NAME not provided")
 endif()
