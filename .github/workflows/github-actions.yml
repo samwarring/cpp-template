@@ -23,6 +23,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Restore Cached Dependencies
+        uses: actions/cache@v2
+        with:
+          path: C:\users\runneradmin\AppData\Local\vcpkg
+          key: vcpkg-${{ runner.os }}
       - name: Configure
         env:
           VCPKG_ROOT: C:\vcpkg
