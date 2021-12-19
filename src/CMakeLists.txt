@@ -1,3 +1,3 @@
-add_library(fib fib.cpp)
-add_library(fib::fib ALIAS fib)
-target_include_directories(fib PUBLIC ../include)
+add_library(math fib.cpp collatz.cpp)
+add_library(math::math ALIAS math)
+target_include_directories(math PUBLIC ../include)
