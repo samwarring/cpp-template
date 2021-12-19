@@ -28,12 +28,12 @@ jobs:
         with:
           path: |
             C:\users\runneradmin\AppData\Local\vcpkg
-            ${{ env.VCPKG_INSTALLATION_ROOT }}\downloads\tools
+            C:\vcpkg\downloads\tools
           key: vcpkg-${{ runner.os }}-${{ github.ref_name }}
           restore-keys: vcpkg-${{ runner.os }}-develop
       - name: Configure
         env:
-          VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
+          VCPKG_ROOT: C:\vcpkg
         run: cmake --preset vs2019
       - name: Build Debug
         run: cmake --build --preset vs2019-debug
