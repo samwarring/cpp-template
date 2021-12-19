@@ -1,4 +1,4 @@
-# cpp-template
+# cpp_template
 
 This repo is a starting point for cross-platform C++ projects.
 
