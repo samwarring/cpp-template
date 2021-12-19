@@ -19,7 +19,7 @@ string(TOUPPER ${NEW_NAME_UNDERSCORES} NEW_NAME_MACRO)
 
 # Does user prefer hypen-separated-names or underscore_separated_names?
 string(REGEX MATCH "[-]" NAME_HAS_HYPHEN ${NEW_NAME})
-if (${NAME_HAS_HYPHEN})
+if (${NAME_HAS_HYPHEN} STREQUAL "-")
     set(NAME_SEP "-")
     set(NEW_NAME ${NEW_NAME_HYPENS})
 else()
