@@ -68,3 +68,6 @@ rename_file(test/cpp_template_test.cpp "test/${NEW_NAME}_test.cpp")
 
 # Remove this script
 remove_file(adapt_template.cmake)
+
+# Stage all changes (but don't commit)
+execute_process(COMMAND "${GIT_EXECUTABLE}" add --all)
