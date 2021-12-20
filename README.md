@@ -1,5 +1,5 @@
-# cpp-template
-
+# cpp_template
+<!-- begin new description -->
 This repo is a starting point for cross-platform C++ projects.
 
 ## Features:
@@ -8,6 +8,13 @@ This repo is a starting point for cross-platform C++ projects.
 1. CMakePresets.json to record different CMake configurations.
 1. vcpkg.json to automatically fetch and install dependent libraries on Windows (default triplet is x64-windows).
 1. Track apt packages required for building in a file.
+
+## Adapting the Template
+This will update all files in the repo to use your new project name and stage the changes to git (Requires CMake).
+```
+cmake -DNEW_NAME=<new project name> -DNEW_DESC="<new description>" -P adapt_template.cmake
+```
+<!-- end new description -->
 
 ## Building on Debian Linux
 ### Environment Setup

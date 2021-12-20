@@ -1,3 +1,3 @@
-add_executable(fib_test fib_test.cpp)
-target_link_libraries(fib_test PRIVATE fib::fib Boost::unit_test_framework)
-add_test(NAME fib_test COMMAND fib_test)
+add_executable(cpp_template_test cpp_template_test.cpp)
+target_link_libraries(cpp_template_test PRIVATE cpp_template Boost::unit_test_framework)
+add_test(NAME cpp_template_test COMMAND cpp_template_test)

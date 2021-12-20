@@ -1,3 +1,2 @@
-add_library(fib fib.cpp)
-add_library(fib::fib ALIAS fib)
-target_include_directories(fib PUBLIC ../include)
+add_library(cpp_template cpp_template.cpp)
+target_include_directories(cpp_template PUBLIC ../include)
