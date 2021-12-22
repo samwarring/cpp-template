@@ -1,0 +1,49 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: sudo apt install `cat apt-build-depends.txt`
+      - name: Configure
+        run: cmake --preset ninja-multi
+      - name: Build Debug
+        run: cmake --build --preset ninja-multi-debug
+      - name: Build Release
+        run: cmake --build --preset ninja-multi-release
+      - name: Test Debug
+        run: ctest --preset ninja-multi-debug
+      - name: Test Release
+        run: ctest --preset ninja-multi-release
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Restore Cached Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            C:\users\runneradmin\AppData\Local\vcpkg
+            C:\vcpkg\downloads\tools
+          key: vcpkg-${{ runner.os }}
+      - name: Configure
+        env:
+          VCPKG_ROOT: C:\vcpkg
+        run: cmake --preset vs2019
+      - name: Build Debug
+        run: cmake --build --preset vs2019-debug
+      - name: Build Release
+        run: cmake --build --preset vs2019-release
+      - name: Test Debug
+        run: ctest --preset vs2019-debug
+      - name: Test Release
+        run: ctest --preset vs2019-release
