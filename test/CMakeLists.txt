@@ -1,3 +1,4 @@
 add_executable(cpp_template_test cpp_template_test.cpp)
-target_link_libraries(cpp_template_test PRIVATE cpp_template Boost::unit_test_framework)
+target_link_libraries(cpp_template_test PRIVATE cpp_template
+                                                Boost::unit_test_framework)
 add_test(NAME cpp_template_test COMMAND cpp_template_test)
